@@ -46,7 +46,7 @@ class Planeta(object):
         '''
         y_anterior = self.y_actual
         self.y_actual = y_anterior + dt * ecuacion_de_movimiento()
-        self.t_actual +=dt
+        self.t_actual += dt
 
 
     def avanza_rk4(self, dt):
@@ -66,13 +66,24 @@ class Planeta(object):
         k4 = dt * ecuacion_de_movimiento()
 
         self.y_actual = y_anterior + (k1 + 2 * k2 + 2 * k3 + k4)/6.
-        self.t_actual +=dt
+        self.t_actual += dt
 
-    def avanza_verlet(self, dt):
+    def avanza_verlet(self, dt, y_anterior):
         '''
         Similar a avanza_euler, pero usando Verlet.
         '''
-        pass
+        x_ant, y_ant, vx_ant, vy_ant = y_anterior
+        x, y, vx, vy = self.y_actual
+        vx, vy, fx, fy = ecuacion_de_movimiento()
+
+        x_desp = 2 * x - x_ant + dt**2 * fx
+        y_desp = 2 * y - y_ant + dt**2 * fy
+        vx_desp = (x_desp - x_ant) / (2. * dt)
+        vy_desp = (y_desp - y_ant) / (2. * dt)
+
+        self.y_actual = x_desp, y_desp, vx_desp, vy_desp
+        self.t_actual += dt
+
 
     def energia_total(self):
         '''

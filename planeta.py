@@ -83,7 +83,7 @@ class Planeta(object):
         vx_desp = (x_desp - x_ant) / (2. * dt)
         vy_desp = (y_desp - y_ant) / (2. * dt)
 
-        self.y_actual = x_desp, y_desp, vx_desp, vy_desp
+        self.y_actual = np.array([x_desp, y_desp, vx_desp, vy_desp])
         self.t_actual += dt
 
     def energia_total(self):

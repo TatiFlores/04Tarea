@@ -45,13 +45,24 @@ class Planeta(object):
         '''
         y_anterior = self.y_actual
         self.y_actual = y_anterior + dt * ecuacion_de_movimiento()
-        self.t_actual = 0
+        self.t_actual +=dt
 
-      def avanza_rk4(self, dt):
+
+    def avanza_rk4(self, dt):
         '''
         Similar a avanza_euler, pero usando Runge-Kutta 4.
         '''
-        pass
+        y_anterior = np.copy(self.y_actual)
+        k1 = dt * ecuacion_de_movimiento()
+        self.y_actual = y_anterior + k1 / 2.
+        k2 = dt * ecuacion_de_movimiento()  
+        self.y_actual = y_anterior + k2 / 2.
+        k3 = dt * ecuacion_de_movimiento()
+        self.y_actual = y_anterior + k3
+        k4 = dt * ecuacion_de_movimiento()
+
+        self.y_actual = y_anterior + (k1 + 2 * k2 + 2 * k3 + k4)/6.
+        self.t_actual +=dt
 
     def avanza_verlet(self, dt):
         '''

@@ -43,9 +43,11 @@ class Planeta(object):
         en un intervalo de tiempo dt usando el método de Euler explícito. El
         método no retorna nada, pero re-setea los valores de self.y_actual.
         '''
-        pass
+        y_anterior = self.y_actual
+        self.y_actual = y_anterior + dt * ecuacion_de_movimiento()
+        self.t_actual = 0
 
-    def avanza_rk4(self, dt):
+      def avanza_rk4(self, dt):
         '''
         Similar a avanza_euler, pero usando Runge-Kutta 4.
         '''

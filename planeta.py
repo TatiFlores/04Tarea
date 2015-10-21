@@ -4,6 +4,7 @@ import numpy as np
 
 G=1
 M=1
+m=1
 
 class Planeta(object):
     '''
@@ -54,10 +55,13 @@ class Planeta(object):
         '''
         y_anterior = np.copy(self.y_actual)
         k1 = dt * ecuacion_de_movimiento()
+
         self.y_actual = y_anterior + k1 / 2.
-        k2 = dt * ecuacion_de_movimiento()  
+        k2 = dt * ecuacion_de_movimiento()
+
         self.y_actual = y_anterior + k2 / 2.
         k3 = dt * ecuacion_de_movimiento()
+
         self.y_actual = y_anterior + k3
         k4 = dt * ecuacion_de_movimiento()
 
@@ -74,4 +78,8 @@ class Planeta(object):
         '''
         Calcula la enérgía total del sistema en las condiciones actuales.
         '''
-        pass
+        x, y, vx, vy = self.y_actual
+        r = np.sqrt(x**2 + y**2)
+        k = m * (vx**2 + vy**2)/2.
+        u = - G * M * m / r + self.alpha * G * M * m / r**2
+        self.energia_actual = k + u

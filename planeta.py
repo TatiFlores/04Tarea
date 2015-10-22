@@ -9,7 +9,10 @@ m = 1
 
 class Planeta(object):
     '''
-    Complete el docstring.
+    Contiene las posiciones y velocidades de un Planeta, la ecuacion de
+    movimiento de este, y los metodos de rnge Kutta 4, Euler y Verlet que
+    avanzan 1 paso. Tambien s calcula la energia del planeta dada sus
+    condiciones actuales
     '''
 
     def __init__(self, condicion_inicial, alpha=0):
